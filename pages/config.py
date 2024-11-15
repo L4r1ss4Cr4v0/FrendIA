@@ -1,20 +1,30 @@
 import streamlit as st
-from langchain_openai import ChatOpenAI
-import pages.chatbot as pgChatbot
 
-def PageConfiguration(name):
+# def colorido():
+#     st.markdown("""
+#         <style>
+#             button{
+#                 background-color: red !important;    
+#             }
+#         </style>
+#         """, 
+#         unsafe_allow_html=True)
+
+def PageConfiguration():
 
     with st.container(border=True):
         st.subheader('Escolha o sexo')
         col1, col2 = st.columns(2)
         with col1:
-            st.button('🧑', key='homem')
+            if st.button('🧑', key='homem'):
+                st.session_state.sexo_escolhido = 'Masculino'
+                # colorido()
         with col2:
-            st.button('👩', key='mulher')
-
-    with st.form(key='dados'):
+            if st.button('👩', key='mulher'):
+                st.session_state.sexo_escolhido = 'Feminino'
+                # colorido()
         name = st.text_input('Digite o nome do seu FriendIA').split()
         caract = st.text_area('Como você quer que ele/ela seja?', placeholder='Ex.: Ele é um bombeiro dedicado com 1.80m de altura...')
-        
-        if st.form_submit_button('Tudo OK!'):
-            pgChatbot.pageChatbot(name)
+        if st.session_state.sexo_escolhido != 'NDA':
+            if st.button("Passar"):
+                pass
