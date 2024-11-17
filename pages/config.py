@@ -1,4 +1,5 @@
 import streamlit as st
+import pages.chatbot as pgChat
 
 # def colorido():
 #     st.markdown("""
@@ -11,8 +12,7 @@ import streamlit as st
 #         unsafe_allow_html=True)
 
 def PageConfiguration():
-
-    with st.container(border=True):
+    with st.empty().container(border=True):
         st.subheader('Escolha o sexo')
         col1, col2 = st.columns(2)
         with col1:
@@ -25,6 +25,7 @@ def PageConfiguration():
                 # colorido()
         name = st.text_input('Digite o nome do seu FriendIA').split()
         caract = st.text_area('Como você quer que ele/ela seja?', placeholder='Ex.: Ele é um bombeiro dedicado com 1.80m de altura...')
-        if st.session_state.sexo_escolhido != 'NDA':
+        if st.session_state.sexo_escolhido != 'NDA' and name != "" and caract != "":
             if st.button("Passar"):
-                pass
+                st.empty().empty()
+                pgChat.pageChatbot(name, caract)
