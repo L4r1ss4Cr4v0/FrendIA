@@ -7,6 +7,9 @@ st.set_page_config(page_title='FriendIA')
 
 if 'sexo_escolhido' not in st.session_state:
     st.session_state.sexo_escolhido = "NDA"
+    st.session_state.nome = ""
+    st.session_state.caract = ""
+
 if 'inicio' not in st.session_state:
     st.session_state.inicio = False
 
@@ -18,6 +21,10 @@ st.markdown("""
         .stSidebar, .st-emotion-cache-1f3w014, st-emotion-cache-hzo1qh eczjsme5, 
         .st-emotion-cache-1wqrzgl, .st-emotion-cache-hzo1qh, eczjsme18 {
             display: none;
+        }
+        .st-emotion-cache-mptgkq, .exotz4b0{
+            width: 100%;
+
         }
     </style>
     
