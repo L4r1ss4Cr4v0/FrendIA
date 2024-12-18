@@ -3,7 +3,7 @@ import os
 import pages.config as pgConfig
 import pages.chatbot as pgChat
 
-st.set_page_config(page_title='FriendIA')
+st.set_page_config(page_title="FriendIA")
 
 if 'sexo_escolhido' not in st.session_state:
     st.session_state.sexo_escolhido = "NDA"
@@ -24,7 +24,23 @@ st.markdown("""
         }
         .st-emotion-cache-mptgkq, .exotz4b0{
             width: 100%;
-
+        }
+        .st-emotion-cache-janbn0{
+            padding: 15px !important;
+            text-align: start;
+        }
+        h1{
+            margin-bottom: 30px;
+        }
+        .stChatMessage{
+            background-color: #5555;    
+        }
+        .st-emotion-cache-4oy321{
+            flex-direction: row-reverse;  
+            text-align: end; 
+        }
+        .st-emotion-cache-18qnold{
+            margin-right: 15px;    
         }
     </style>
     
