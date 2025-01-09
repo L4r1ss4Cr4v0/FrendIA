@@ -1,16 +1,6 @@
 import streamlit as st
 import pages.chatbot as pgChat
 
-# def colorido():
-#     st.markdown("""
-#         <style>
-#             button{
-#                 background-color: red !important;    
-#             }
-#         </style>
-#         """, 
-#         unsafe_allow_html=True)
-
 def PageConfiguration():
 
     placeholder = st.empty()
