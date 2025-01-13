@@ -3,7 +3,6 @@ import os
 import openai
 
 def pageChatbot():
-
     
     openai.api_key = st.secrets['OPENAI_API_KEY']
 
@@ -20,6 +19,21 @@ def pageChatbot():
 
     # Inicializando o modelo do chat
 
+    def setUpModel():    
+        completion = openai.chat.completions.create(
+        model=st.session_state.chat_model,
+        messages=[
+            {"role": "developer", "content": f"You are a {st.session_state.sexo_escolhido} called {st.session_state.nome}. You are also a {st.session_state.caract}. Anser all the messages in this caracter."},
+        ]
+        )
+        return completion.choices[0].message
+    
+    user_response = st.chat_input('Digite sua mensagem aqui')
+    
+    if "first_message" not in st.session_state:
+        setUpModel()
+        st.session_state.first_message = True
+
     # Criando o historico
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
@@ -28,8 +42,6 @@ def pageChatbot():
     for message in st.session_state.chat_history:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-
-    user_response = st.chat_input('Digite sua mensagem aqui')
 
     if user_response is not None or "":
 
@@ -57,8 +69,7 @@ def pageChatbot():
             message_placeholder.markdown(full_response)
 
             st.session_state.chat_history.append({"role": avatar, "content": full_response})
-            
 
-    
+
 
     
