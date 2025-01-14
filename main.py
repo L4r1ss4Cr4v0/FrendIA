@@ -5,13 +5,13 @@ import pages.chatbot as pgChat
 
 st.set_page_config(page_title="FriendIA")
 
-if 'sexo_escolhido' not in st.session_state:
-    st.session_state.sexo_escolhido = "NDA"
-    st.session_state.nome = ""
+if 'sex' not in st.session_state:
+    st.session_state.sex = "NDA"
+    st.session_state.name = ""
     st.session_state.caract = ""
 
 if 'inicio' not in st.session_state:
-    st.session_state.inicio = False
+    st.session_state.init = False
 
 st.markdown("""
     <style>
@@ -49,15 +49,15 @@ st.markdown("""
 
 placeholder = st.empty()
 
-if not st.session_state.inicio:
+if not st.session_state.init:
     with placeholder.container():
         st.title('Converse com seu FriendIA!')
         st.subheader('Crie o seu amigo virtual! Personalize-o do jeito que quiser')
         if st.button('Vamos começar!'):
-            st.session_state.inicio = True  
+            st.session_state.init = True  
             placeholder.empty()  
 
-if st.session_state.inicio:
+if st.session_state.init:
    pgConfig.PageConfiguration()
 
 

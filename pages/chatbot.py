@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 import openai
 
 def pageChatbot():
@@ -9,7 +8,7 @@ def pageChatbot():
     st.title(f'👋 Conversa com {st.session_state.nome[0]}')
 
     # Setando as variavéis
-    if st.session_state.sexo_escolhido == "Masculino":
+    if st.session_state.sex == "man":
         avatar = "👦🏻"
     else:
         avatar = "👧🏻"
@@ -23,7 +22,7 @@ def pageChatbot():
         completion = openai.chat.completions.create(
         model=st.session_state.chat_model,
         messages=[
-            {"role": "developer", "content": f"You are a {st.session_state.sexo_escolhido} called {st.session_state.nome}. You are also a {st.session_state.caract}. Anser all the messages in this caracter."},
+            {"role": "developer", "content": f"You are a {st.session_state.sex} called {st.session_state.name}. You are also a {st.session_state.caract}. Answer all the messages in this caracter."},
         ]
         )
         return completion.choices[0].message
