@@ -17,21 +17,8 @@ def pageChatbot():
         st.session_state.chat_model = "gpt-4o-mini"
 
     # Inicializando o modelo do chat
-
-    def setUpModel():    
-        completion = openai.chat.completions.create(
-        model=st.session_state.chat_model,
-        messages=[
-            {"role": "developer", "content": f"You are a {st.session_state.sex} called {st.session_state.name}. You are also a {st.session_state.caract}. Answer all the messages in this caracter."},
-        ]
-        )
-        return completion.choices[0].message
     
     user_response = st.chat_input('Digite sua mensagem aqui')
-    
-    if "first_message" not in st.session_state:
-        setUpModel()
-        st.session_state.first_message = True
 
     # Criando o historico
     if "chat_history" not in st.session_state:
@@ -54,18 +41,34 @@ def pageChatbot():
         with st.chat_message(avatar):
             message_placeholder = st.empty()
             full_response = ""
-            for response in openai.chat.completions.create(
-                model=st.session_state.chat_model,
-                messages=[
-                    {"role": message["role"], "content": message["content"]}
-                    for message in st.session_state.chat_history
-                ],
-                stream=True,
-                max_completion_tokens=200,
-            ):
-                full_response += response.choices[0].delta.get("content", "")
-                message_placeholder.markdown(full_response + " ")
-            message_placeholder.markdown(full_response)
+            if "first_message" not in st.session_state:
+                st.session_state.first_message = True            
+                for response in openai.chat.completions.create(
+                    model=st.session_state.chat_model,
+                    messages=[
+                        {"role": "developer", "content": f"You are a {st.session_state.sex} called {st.session_state.name}. You are also a {st.session_state.caract}. Answer all the messages in this character."},
+                        {"role": message["role"], "content": message["content"]}
+                        for message in st.session_state.chat_history
+                    ],
+                    stream=True,
+                    max_completion_tokens=200,
+                ):                    
+                    full_response += response.choices[0].delta.get("content", "")
+                    message_placeholder.markdown(full_response + " ")
+                    message_placeholder.markdown(full_response)
+            else:            
+                for response in openai.chat.completions.create(
+                    model=st.session_state.chat_model,
+                    messages=[
+                        {"role": message["role"], "content": message["content"]}
+                        for message in st.session_state.chat_history
+                    ],
+                    stream=True,
+                    max_completion_tokens=200,
+                ):
+                    full_response += response.choices[0].delta.get("content", "")
+                    message_placeholder.markdown(full_response + " ")
+                    message_placeholder.markdown(full_response)
 
             st.session_state.chat_history.append({"role": avatar, "content": full_response})
 
