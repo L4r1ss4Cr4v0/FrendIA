@@ -14,11 +14,11 @@ def PageConfiguration():
             st.subheader('Escolha o sexo')
             col1, col2 = st.columns(2)
             with col1:
-                if st.button('🧑', key='man'):
-                    st.session_state.sex = 'man'
+                if st.button('🧑', key='homem'):
+                    st.session_state.sex = 'homem'
             with col2:
-                if st.button('👩', key='woman'):
-                    st.session_state.sex = 'woman'
+                if st.button('👩', key='mulher'):
+                    st.session_state.sex = 'mulher'
             if st.session_state.sex != "NDA":
                 st.text(f"Sexo escolhido: {st.session_state.sex}")
 

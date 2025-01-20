@@ -8,7 +8,7 @@ def pageChatbot():
     st.title(f'👋 Conversa com {st.session_state.nome[0]}')
 
     # Setando as variavéis
-    if st.session_state.sex == "man":
+    if st.session_state.sex == "homem":
         avatar = "👦🏻"
     else:
         avatar = "👧🏻"
@@ -46,7 +46,7 @@ def pageChatbot():
                 for response in openai.chat.completions.create(
                     model=st.session_state.chat_model,
                     messages=[
-                        {"role": "developer", "content": f"You are a {st.session_state.sex} called {st.session_state.name}. You are also a {st.session_state.caract}. Answer all the messages in this character."},
+                        {"role": "developer", "content": f"Você é {st.session_state.sex} chamado {st.session_state.name}. Você também é {st.session_state.caract}. Responda todas as perguntas nesse personagem."},
                         {"role": message["role"], "content": message["content"]}
                         for message in st.session_state.chat_history
                     ],
